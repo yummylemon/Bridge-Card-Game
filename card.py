@@ -3,7 +3,7 @@ import random
 
 @total_ordering
 class Card(object):
-    """一张牌"""
+    """one card"""
 
     def __init__(self, suite, face):
         self._suite = suite
@@ -41,7 +41,7 @@ class Card(object):
 
 
 class Poker(object):
-    """一副牌"""
+    """a suite of cards"""
 
     def __init__(self):
         self._cards = [Card(suite, face) 
@@ -54,25 +54,25 @@ class Poker(object):
         return self._cards
 
     def shuffle(self):
-        """洗牌(随机乱序)"""
+        """randomly shuffle"""
         self._current = 0
         random.shuffle(self._cards)
 
     @property
     def next(self):
-        """发牌"""
+        """deal"""
         card = self._cards[self._current]
         self._current += 1
         return card
 
     @property
     def has_next(self):
-        """还有没有牌"""
+        """without a card"""
         return self._current < len(self._cards)
 
 
 class Player(object):
-    """玩家"""
+    """player"""
 
     def __init__(self, name):
         self._name = name
@@ -123,14 +123,14 @@ class Player(object):
         return self.__str__()
 
 
-# 排序规则-先根据花色再根据点数排序
+# Ｓort-先根據花色再根據點數排序
 def get_key(card):
     return (card.suite, card.face)
 
 def main():
     p = Poker()
     p.shuffle()
-    players = [Player('东邪'), Player('西毒'), Player('南帝'), Player('北丐')]
+    players = [Player('East'), Player('West'), Player('South'), Player('North')]
     for _ in range(13):
         for player in players:
             player.get(p.next)
