@@ -13,3 +13,5 @@ $ import sys
 $ import time
 $ import threading
 ```
+# Features
+To test the the winning percentage for seperate strategies.
