@@ -11,30 +11,30 @@ from robot import *
 def animated_loading(option, count):
     if option == 1:
         if count == 1:
-            print('原住民小石 ： 喔啊發薩撒刁得！！ 小馮我愛你！！！ ')
+            print('原住民小石 ： 嗨大家好！ ')
             time.sleep(2.5)
-            print('醫學系小馮 ： 我也是！！ ♥你 喜歡跟你做♥心！')
-            print('關燈後...')
+            print('醫學系小馮 ： 你好！')
+            print('認識很久後...')
             time.sleep(2.5)
             for _ in range(10):
                 print('醫學系小馮：' + 'A' * 15 + '!!!', sep=' ')
                 time.sleep(0.5)
 
         if count >= 2:
-            print('原住民小石 ： 喔啊發薩撒刁得！！ 小馮我愛你！！！ ')
+            print('原住民小石 ： 嗨大家好！')
             time.sleep(1.5)
-            print('醫學系小馮 ：' + '我腿軟惹QQ' * count)
-            print('關燈後...')
+            print('醫學系小馮 ：' + '開心認識你' * count)
+            print('認識很久後...')
             time.sleep(1.5)
             for _ in range(10):
                 print('醫學系小馮：' + 'A' * 15 * count + '!!!', sep=' ')
                 time.sleep(max(0.5 - (0.15 * count), 0.2))
 
     if option == 2:
-        print('\n-1 跟 1 都搞錯，你他媽喜憨兒嗎？\n')
+        print('\n-1 跟 1 是不一樣的\n')
         time.sleep(1)
-        print('\n就是有你們這種人，程式才要防錯變得很長，懲罰一下:')
-        print('滾回去重選')
+        print('\n程式需要防錯:')
+        print('請重選')
         chars = "/—\\|"*10
         for char in chars:
             sys.stdout.write('\r'+'loading...'+char)
@@ -59,7 +59,7 @@ def choose(person, suite_for_this_turn="♠♥♦♣"):
 
     if suite_for_this_turn in person.suites_on_hand() and suite not in suite_for_this_turn:
         print("\n您的花色不符合規則，花色要出{0}，除非您已無該花色的牌".format(suite_for_this_turn))
-        print("但你還有{0}張{1}牌，你又不是韓國瑜，非要作弊不可嗎？\n"
+        print("但你還有{0}張{1}牌\n"
               .format(len(person.find_suite(suite_for_this_turn)), suite_for_this_turn))
 
         return choose(person, suite_for_this_turn)
@@ -72,7 +72,7 @@ def choose(person, suite_for_this_turn="♠♥♦♣"):
             return card
 
     # 出的牌不在手中
-    print("你選的牌不在你手中！台北的未來在丁守中！ 他要重選，你也一樣")
+    print("你選的牌不在你手中！請重新選擇")
     return choose(person, suite_for_this_turn)
 
 # 隨機出牌 待改 花色限制問題
@@ -110,7 +110,7 @@ def show_cards(close_show=1):
 
 # 每回合玩牌過程
 
-def play(position, players, king, model, close_show, nickname="國家機器"):  # 玩家的名字 待改
+def play(position, players, king, model, close_show, nickname="國家機器"):  # 玩家的名字
     person_on_turn = players[position]
 
     # 如果不是真人玩家，展示所有電腦的手牌
@@ -252,7 +252,7 @@ def bridge_game(model, close_show):  # 牌局開始
 def control_model(count=1):
     num = 1  # 牌局執行次數，預設為1，可由model選擇修改
     close_show = 1  # 是否開啟顯示過程，預設為開啟，可由model選擇修改
-    model = input("請輸入本局橋牌型態:\n\t扮演國家機器，和助手一起消滅台灣敗類，請輸入 0:\n\
+    model = input("請輸入本局橋牌型態:\n\t扮演國家機器，和助手一起贏得此局，請輸入 0:\n\
 \t電腦自動對戰，請輸入 1: \n\
 \t測試橋牌策略，請輸入 2: \n\
 \t想告白，請輸入 520:\n")
@@ -263,27 +263,27 @@ def control_model(count=1):
         return control_model(count)
 
     if model not in map(str, range(0, 3)):
-        print('\n看清楚指示，瞎了去看眼科 o__o，重選啦幹\n')
+        print('\n請看清楚指示\n')
         return control_model()
 
     if model == "1":
-        # print('因為我懶的防錯了，所以這邊不打數字會爆掉，不用試了')
+        # print('防錯')
         try:
             num = int(input('您希望跑幾次呢？請輸入阿拉伯數字:'))
         except:
-            print('\n叫你打阿拉伯數字，你打啥小？\n')
+            print('\n請輸入阿拉伯數字\n')
             return control_model()
 
         if num >= 10:
             try:
-                close_show = int(input('\n您輸入的模擬遊戲次數偏多，若要關閉顯示過程請輸入-1\n\
+                close_show = int(input('\n您輸入的模擬遊戲次數過多，若要關閉顯示過程請輸入-1\n\
                     否則會跑很慢，若仍要開啟請輸入1：'))
             except:
                 animated_loading(2)  # 顯示小動畫
                 return control_model()
 
     if model == "2":
-        print("施工中...\n")
+        print("施工中\n")
         return control_model()
 
     else:
